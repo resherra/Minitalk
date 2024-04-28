@@ -6,7 +6,7 @@
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:33:32 by recherra          #+#    #+#             */
-/*   Updated: 2024/04/28 16:33:33 by recherra         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:39:58 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "libft/libft.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include <signal.h>
 
 //write, signal, sigemptyset, sigaddset, sigaction, kill, getpid, malloc, free, pause, sleep, usleep, exit
 

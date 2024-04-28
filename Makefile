@@ -6,21 +6,36 @@
 #    By: recherra <recherra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 16:33:38 by recherra          #+#    #+#              #
-#    Updated: 2024/04/28 16:33:39 by recherra         ###   ########.fr        #
+#    Updated: 2024/04/28 20:16:47 by recherra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFALGS=-Wall -Wextra
+CFLAGS=-Wall -Wextra
+SRC_CLIENT=client.c
+SRC_SERVER=server.c
+OBJS_CLIENT=$(SRC_CLIENT:.c=.o)
+OBJS_SERVER=$(SRC_SERVER:.c=.o)
+LIBFT=libft/libft.a
+NAME=client
+SERVER_NAME=server
 
-SRC=main.c
-OBJS=${SRC:.c=.o}
+all: $(NAME) $(SERVER_NAME)
 
-$(NAME)
+$(NAME): $(LIBFT) $(OBJS_CLIENT) client.h
+	cc  $(OBJS_CLIENT) -o $(NAME) $(CFLAGS) $(LIBFT)
 
-all:
+$(SERVER_NAME): $(LIBFT) $(OBJS_SERVER) server.h
+	cc $(OBJS_SERVER) -o $(SERVER_NAME) $(CFLAGS) $(LIBFT)
+
+$(LIBFT):
+	make -C libft/
 
 clean:
+	rm -rf $(OBJS_CLIENT) $(OBJS_SERVER)
+	make -C libft/ clean
 
-fclean:
-
-re:
+fclean: clean
+	rm $(NAME) $(NAME_SERVER)
+	make -C libft/ fclean
+		
+re: fclean all
