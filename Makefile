@@ -6,11 +6,11 @@
 #    By: recherra <recherra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 16:33:38 by recherra          #+#    #+#              #
-#    Updated: 2024/04/28 20:16:47 by recherra         ###   ########.fr        #
+#    Updated: 2024/04/30 19:38:56 by recherra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS=-Wall -Wextra
+CFLAGS=-Wall -Wextra -Werror -fsanitize=address
 SRC_CLIENT=client.c
 SRC_SERVER=server.c
 OBJS_CLIENT=$(SRC_CLIENT:.c=.o)
@@ -35,7 +35,7 @@ clean:
 	make -C libft/ clean
 
 fclean: clean
-	rm $(NAME) $(NAME_SERVER)
+	rm $(NAME) $(SERVER_NAME)
 	make -C libft/ fclean
 		
 re: fclean all
