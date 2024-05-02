@@ -12,7 +12,7 @@
 
 #include "init.h"
 
-void	kill_err_handling()
+void	kill_err_handling(void)
 {
 	ft_putendl_fd("Error occured.", 2);
 	exit(1);
@@ -61,7 +61,7 @@ void	send_bit(int pid, char a)
 			if (kill(pid, SIGUSR2) == -1)
 				kill_err_handling();
 		}
-		usleep(300);
+		usleep(200);
 		i--;
 	}
 }

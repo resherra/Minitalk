@@ -19,17 +19,17 @@
 
 typedef struct s_len
 {
-    int len;
-    int len_bits;
-    char *str;
-} t_len;
+	int				len;
+	int				len_bits;
+	char			*str;
+}					t_len;
 
-typedef struct  s_char
+typedef struct s_char
 {
-    unsigned char ch;
-    int bits;
-    int i;
+	unsigned char	ch;
+	int				bits;
+	int				i;
 
-} t_char;
+}					t_char;
 
 #endif
