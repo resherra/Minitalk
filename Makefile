@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS=-Wall -Wextra -Werror -fsanitize=address
+CFLAGS=-Wall -Wextra -Werror
 SRC_CLIENT=client.c
 SRC_SERVER=server.c
 OBJS_CLIENT=$(SRC_CLIENT:.c=.o)

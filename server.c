@@ -12,96 +12,80 @@
 
 #include "server.h"
 
-
-void len_handler(int signal, siginfo_t *info, void *context)
+void reset_values(t_len *data, t_char *packet, int *old_pid, pid_t new_pid)
 {
-    (void)info;
-    (void)context;
-    static int len = 0;
-    static int bits  = 0;
+    data->len = 0;
+    data->len_bits = 0;
+    packet->ch = 0;
+    packet->bits = 0;
+    packet->i = 0;
+    *old_pid = new_pid;
+}
 
-    len = len << 1;
+void get_string(t_len *data, t_char *packet, int signal)
+{
+    packet->ch = packet->ch << 1;
     if (signal == SIGUSR2)
-        len = len | 1;
-    bits++;
-    if (bits == 32)
+        packet->ch = packet->ch | 1;
+    packet->bits++;
+    if (packet->bits == 8)
     {
-        ft_printf("len -> %d\n", len);
-        exit(1);
+        data->str[packet->i] = packet->ch;
+        packet->i++;
+        packet->ch = 0;
+        packet->bits = 0;
+    }
+    if (packet->i == data->len)
+    {
+        ft_printf("%s\n", data->str);
+        free(data->str);
+        data->len_bits = 0;
+        data->len = 0;
+        packet->i = 0;
     }
 }
 
-void handler(int signal, siginfo_t *info, void *context)
+void	handler(int signal, siginfo_t *info, void *context)
 {
-    // printf("sending process -> %d\n", info->si_pid);
-    (void)info;
+    static t_len data;
+    static t_char packet;
+	static int			old_pid;
+
     (void)context;
-//    static unsigned char ch = 0;
-//    static int bits = 0;
-
-
-    //len and alloc
-    static int len = 0;
-    static int len_bits = 0;
-    char *str;
-
-    if (len_bits != 32)
-    {
-        len = len << 1;
-        if (signal == SIGUSR2)
-            len = len | 1;
-        len_bits++;
-        if (len_bits == 32)
-        {
-            str = malloc(len + 1);
-            str[len] = 0;
-//            ft_printf("len -> %d\n", len);
-        }
-        else
-            return;
-    }
-
-    ft_printf("size -> %d\n", sizeof(str));
-
-//    char *str;
-//    str = malloc(len + 1);
-//    str[len] = 0;
-
-//    ch = ch << 1;
-//    if (signal == SIGUSR2)
-//        ch = ch | 1;
-//    bits++;
-//    if (bits == 8)
-//    {
-//        ft_printf("%c", ch);
-//        ch = 0;
-//        bits = 0;
-//    }
+    if (old_pid != info->si_pid)
+	    reset_values(&data, &packet, &old_pid, info->si_pid);
+	if (data.len_bits != 32)
+	{
+		data.len = data.len << 1;
+		if (signal == SIGUSR2)
+			data.len = data.len | 1;
+		data.len_bits++;
+		if (data.len_bits == 32)
+		{
+			data.str = malloc(data.len + 1);
+			data.str[data.len] = 0;
+		}
+		else
+			return ;
+	}
+	else
+	    get_string(&data, &packet, signal);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    (void)av;
+	(void)av;
     if (ac != 1)
-    {
-        ft_putendl_fd("Too many arguments.", 2);
-        return 1;
-    }
-    struct sigaction signals;
-
-    ft_printf("%d\n", getpid());
-
-    //actual string
-    signals.sa_sigaction = &handler;
-    signals.sa_flags = 0;
-
-    //string
-     sigaction(SIGUSR1, &signals, NULL);
-     sigaction(SIGUSR2, &signals, NULL);
-
-    while (1)
-        ;
-//    while (1)
-//        pause();
-    return (0);
+	{
+		ft_putendl_fd("Too many arguments.", 2);
+		return (1);
+	}
+	struct sigaction signals;
+	ft_printf("%d\n", getpid());
+	signals.sa_sigaction = &handler;
+	sigaction(SIGUSR1, &signals, NULL);
+	sigaction(SIGUSR2, &signals, NULL);
+	while (1)
+		pause();
+	return (0);
 }

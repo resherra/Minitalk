@@ -11,21 +11,27 @@
 /* ************************************************************************** */
 
 #ifndef INIT_H
-#define INIT_H
+# define INIT_H
 
-#include "ft_printf/ft_printf.h"
-#include "libft/libft.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <signal.h>
+# include "ft_printf/ft_printf.h"
+# include "libft/libft.h"
+# include <fcntl.h>
+# include <signal.h>
+# include <stdio.h>
 
-// write
-// getpid
-// signal, sigaction, kill
-// sleep, usleep, pause
-// exit
-// malloc, free
-// sigemptyset, sigaddset
+typedef struct s_len
+{
+    int len;
+    int len_bits;
+    char *str;
+} t_len;
 
+typedef struct  s_char
+{
+    unsigned char ch;
+    int bits;
+    int i;
+
+} t_char;
 
 #endif
