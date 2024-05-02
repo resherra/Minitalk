@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "init.h"
 
 void reset_values(t_len *data, t_char *packet, int *old_pid, pid_t new_pid)
 {
@@ -63,6 +63,8 @@ void	handler(int signal, siginfo_t *info, void *context)
 		if (data.len_bits == 32)
 		{
 			data.str = malloc(data.len + 1);
+			if (data.str == NULL)
+			    exit(1);
 			data.str[data.len] = 0;
 		}
 		else

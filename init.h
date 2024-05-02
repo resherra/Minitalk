@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/10 15:59:33 by recherra          #+#    #+#             */
-/*   Updated: 2023/12/31 16:39:12 by recherra         ###   ########.fr       */
+/*   Created: 2024/04/28 16:33:32 by recherra          #+#    #+#             */
+/*   Updated: 2024/05/01 16:17:05 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef INIT_H
+# define INIT_H
 
-char	*ft_strchr(const char *str, int c)
+# include "ft_printf/ft_printf.h"
+# include "libft/libft.h"
+# include <signal.h>
+
+typedef struct s_len
 {
-	char	*s;
-	char	ac;
+    int len;
+    int len_bits;
+    char *str;
+} t_len;
 
-	s = (char *)str;
-	ac = c;
-	while (*s)
-	{
-		if (*s == ac)
-			return (s);
-		s++;
-	}
-	if (ac == '\0')
-		return (s);
-	return (NULL);
-}
+typedef struct  s_char
+{
+    unsigned char ch;
+    int bits;
+    int i;
+
+} t_char;
+
+#endif

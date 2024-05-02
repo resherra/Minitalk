@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -fsanitize=address
 SRC_CLIENT=client.c
 SRC_SERVER=server.c
 OBJS_CLIENT=$(SRC_CLIENT:.c=.o)
@@ -22,10 +22,10 @@ SERVER_NAME=server
 
 all: $(NAME) $(SERVER_NAME)
 
-$(NAME): $(LIBFT) $(FT_PRINTF) $(OBJS_CLIENT) client.h
+$(NAME): $(LIBFT) $(FT_PRINTF) $(OBJS_CLIENT) init.h
 	cc  $(OBJS_CLIENT) -o $(NAME) $(CFLAGS) $(LIBFT) $(FT_PRINTF)
 
-$(SERVER_NAME): $(LIBFT) $(FT_PRINTF) $(OBJS_SERVER) server.h
+$(SERVER_NAME): $(LIBFT) $(FT_PRINTF) $(OBJS_SERVER) init.h
 	cc $(OBJS_SERVER) -o $(SERVER_NAME) $(CFLAGS) $(LIBFT) $(FT_PRINTF)
 
 $(LIBFT):
@@ -45,5 +45,4 @@ fclean: clean
 	make -C libft/ fclean
 	make -C ft_printf/ fclean
 
-		
 re: fclean all

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "init.h"
 
-void	kill_err_handling(void)
+void	kill_err_handling()
 {
 	ft_putendl_fd("Error occured.", 2);
 	exit(1);
