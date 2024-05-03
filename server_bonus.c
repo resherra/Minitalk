@@ -6,7 +6,7 @@
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 19:23:27 by recherra          #+#    #+#             */
-/*   Updated: 2024/05/03 15:58:05 by recherra         ###   ########.fr       */
+/*   Updated: 2024/05/03 20:14:08 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	handler(int signal, siginfo_t *info, void *context)
 				exit(1);
 			data.str[data.len] = 0;
 		}
-		else
-			return ;
 	}
 	else
 		get_string(&data, &packet, signal, info->si_pid);
