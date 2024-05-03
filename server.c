@@ -6,7 +6,7 @@
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:33:45 by recherra          #+#    #+#             */
-/*   Updated: 2024/05/01 18:00:20 by recherra         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:57:43 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	get_string(t_len *data, t_char *packet, int signal)
 	}
 	if (packet->i == data->len)
 	{
-		ft_printf("%s\n", data->str);
+		ft_printf("%s", data->str);
 		free(data->str);
 		data->len_bits = 0;
 		data->len = 0;
