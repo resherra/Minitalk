@@ -79,7 +79,7 @@ int	main(int ac, char **av)
 	}
 	pid = ft_atoi(av[1]);
 	if (pid <= 0)
-		ft_putendl_fd("Invalid PID.", 2);
+        kill_err_handling();
 	i = 0;
 	arg_len = ft_strlen(av[2]);
 	send_len(pid, arg_len);
