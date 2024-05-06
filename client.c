@@ -6,7 +6,7 @@
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:33:51 by recherra          #+#    #+#             */
-/*   Updated: 2024/05/01 17:45:13 by recherra         ###   ########.fr       */
+/*   Updated: 2024/05/06 21:08:45 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	send_len(int pid, int len)
 			if (kill(pid, SIGUSR2) == -1)
 				kill_err_handling();
 		}
-		usleep(200);
+		usleep(400);
 		i--;
 	}
 }
@@ -61,7 +61,7 @@ void	send_bit(int pid, char a)
 			if (kill(pid, SIGUSR2) == -1)
 				kill_err_handling();
 		}
-		usleep(200);
+		usleep(400);
 		i--;
 	}
 }

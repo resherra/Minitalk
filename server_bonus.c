@@ -6,20 +6,20 @@
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 19:23:27 by recherra          #+#    #+#             */
-/*   Updated: 2024/05/03 20:14:08 by recherra         ###   ########.fr       */
+/*   Updated: 2024/05/06 20:53:01 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-void	reset_values(t_len *data, t_char *packet, int *old_pid, pid_t new_pid)
+void	reset_values(t_len *data, t_char *packet, pid_t new_pid)
 {
 	data->len = 0;
 	data->len_bits = 0;
 	packet->ch = 0;
 	packet->bits = 0;
 	packet->i = 0;
-	*old_pid = new_pid;
+	data->old_pid = new_pid;
 }
 
 void	get_string(t_len *data, t_char *packet, int signal, pid_t client_pid)
@@ -50,11 +50,10 @@ void	handler(int signal, siginfo_t *info, void *context)
 {
 	static t_len	data;
 	static t_char	packet;
-	static int		old_pid;
 
 	(void)context;
-	if (old_pid != info->si_pid)
-		reset_values(&data, &packet, &old_pid, info->si_pid);
+	if (data.old_pid != info->si_pid)
+		reset_values(&data, &packet, info->si_pid);
 	if (data.len_bits != 32)
 	{
 		data.len = data.len << 1;
@@ -65,7 +64,10 @@ void	handler(int signal, siginfo_t *info, void *context)
 		{
 			data.str = malloc(data.len + 1);
 			if (data.str == NULL)
-				exit(1);
+			{
+				reset_values(&data, &packet, info->si_pid);
+				return ;
+			}
 			data.str[data.len] = 0;
 		}
 	}
