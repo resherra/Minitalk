@@ -6,11 +6,11 @@
 #    By: recherra <recherra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 16:33:38 by recherra          #+#    #+#              #
-#    Updated: 2024/05/01 16:15:02 by recherra         ###   ########.fr        #
+#    Updated: 2024/05/06 12:08:40 by recherra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS=-Wall -Wextra -Werror -fsanitize=address
+CFLAGS=-Wall -Wextra -Werror
 SRC_CLIENT=client.c
 SRC_SERVER=server.c
 SRC_SERVER_BONUS=server_bonus.c
