@@ -6,7 +6,7 @@
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:33:51 by recherra          #+#    #+#             */
-/*   Updated: 2024/05/06 21:08:45 by recherra         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:25:32 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 	i = 0;
 	arg_len = ft_strlen(av[2]);
 	send_len(pid, arg_len);
-	while (av[2][i])
+	while (av[2][i] || av[2][i] == '\0')
 	{
 		send_bit(pid, av[2][i]);
 		i++;

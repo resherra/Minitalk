@@ -6,7 +6,7 @@
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:33:32 by recherra          #+#    #+#             */
-/*   Updated: 2024/05/06 20:44:13 by recherra         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:12:50 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 typedef struct s_len
 {
-	int				len;
-	int				len_bits;
+	unsigned int				len;
+	unsigned int				len_bits;
 	int				old_pid;
 	char			*str;
 
@@ -29,8 +29,8 @@ typedef struct s_len
 typedef struct s_char
 {
 	unsigned char	ch;
-	int				bits;
-	int				i;
+	unsigned int				bits;
+	unsigned int				i;
 }					t_char;
 
 #endif
