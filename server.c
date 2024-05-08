@@ -54,18 +54,15 @@ void	handler(int signal, siginfo_t *info, void *context)
 	if (data.old_pid != info->si_pid)
 	{
 		reset_values(&data, &packet, info->si_pid);
-		//printf("%")
 	}
 	if (data.len_bits != 32)
 	{
-		// ft_printf("\ndata len bits %d\n", data.len_bits);
 		data.len = data.len << 1;
 		if (signal == SIGUSR2)
 			data.len = data.len | 1;
 		data.len_bits++;
 		if (data.len_bits == 32)
 		{
-			data.len_bits = 32;
 			data.str = malloc(data.len + 1);
 			if (data.str == NULL)
 			{
@@ -73,8 +70,6 @@ void	handler(int signal, siginfo_t *info, void *context)
 				return ;
 			}
 			ft_printf("\nlen --> %d\n", data.len);
-			
-//			data.str[data.len] = 0;
 		}
 	}
 	else

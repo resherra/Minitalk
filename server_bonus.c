@@ -62,7 +62,6 @@ void	handler(int signal, siginfo_t *info, void *context)
 		data.len_bits++;
 		if (data.len_bits == 32)
 		{
-		    ft_printf("len -> %d\n", len);
 			data.str = malloc(data.len + 1);
 			if (data.str == NULL)
 			{

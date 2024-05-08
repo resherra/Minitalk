@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 	i = 0;
 	arg_len = ft_strlen(av[2]);
 	send_len(pid, arg_len);
-	while (av[2][i] || av[2][i] == '\0')
+	while (av[2][i])
 	{
 		send_bit(pid, av[2][i]);
 		i++;
