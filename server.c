@@ -63,13 +63,13 @@ void	handler(int signal, siginfo_t *info, void *context)
 		data.len_bits++;
 		if (data.len_bits == 32)
 		{
-			data.str = malloc(data.len + 1);
+            ft_printf("\nlen --> %d\n", data.len);
+            data.str = malloc(data.len + 1);
 			if (data.str == NULL)
 			{
 				reset_values(&data, &packet, info->si_pid);
 				return ;
 			}
-			ft_printf("\nlen --> %d\n", data.len);
 		}
 	}
 	else
