@@ -52,9 +52,7 @@ void	handler(int signal, siginfo_t *info, void *context)
 
 	(void)context;
 	if (data.old_pid != info->si_pid)
-	{
 		reset_values(&data, &packet, info->si_pid);
-	}
 	if (data.len_bits != 32)
 	{
 		data.len = data.len << 1;
@@ -63,8 +61,7 @@ void	handler(int signal, siginfo_t *info, void *context)
 		data.len_bits++;
 		if (data.len_bits == 32)
 		{
-            ft_printf("\nlen --> %d\n", data.len);
-            data.str = malloc(data.len + 1);
+			data.str = malloc(data.len + 1);
 			if (data.str == NULL)
 			{
 				reset_values(&data, &packet, info->si_pid);
@@ -86,10 +83,8 @@ int	main(int ac, char **av)
 		ft_putendl_fd("Too many arguments.", 2);
 		return (1);
 	}
-	ft_printf("Server pid: %d\n", getpid());
-	signals.sa_sigaction = handler;
-	sigemptyset(&signals.sa_mask);
-	sigaddset(&signals.sa_mask, SIGUSR1);
+	ft_printf("%d\n", getpid());
+	signals.sa_sigaction = &handler;
 	sigaction(SIGUSR1, &signals, NULL);
 	sigaction(SIGUSR2, &signals, NULL);
 	while (1)
