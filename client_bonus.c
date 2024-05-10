@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 16:33:51 by recherra          #+#    #+#             */
-/*   Updated: 2024/05/07 15:25:32 by recherra         ###   ########.fr       */
+/*   Created: 2024/05/10 15:43:38 by recherra          #+#    #+#             */
+/*   Updated: 2024/05/10 16:17:16 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ void	send_bit(int pid, char a)
 	}
 }
 
+void	handler(int signal)
+{
+	(void)signal;
+	ft_printf("Message sent successfully!\n");
+	exit(0);
+}
+
 int	main(int ac, char **av)
 {
 	int	pid;
@@ -77,11 +84,14 @@ int	main(int ac, char **av)
 		ft_putendl_fd("too many/few arguments.", 2);
 		return (1);
 	}
+	signal(SIGUSR1, &handler);
 	pid = ft_atoi(av[1]);
 	i = 0;
 	arg_len = ft_strlen(av[2]);
 	send_len(pid, arg_len);
 	while (av[2][i])
 		send_bit(pid, av[2][i++]);
+	while (1)
+		pause();
 	return (0);
 }

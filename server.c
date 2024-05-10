@@ -20,6 +20,8 @@ void	reset_values(t_len *data, t_char *packet, pid_t new_pid)
 	packet->bits = 0;
 	packet->i = 0;
 	data->old_pid = new_pid;
+	free(data->str);
+	data->str = NULL;
 }
 
 void	get_string(t_len *data, t_char *packet, int signal)
@@ -38,7 +40,6 @@ void	get_string(t_len *data, t_char *packet, int signal)
 	if (packet->i == data->len)
 	{
 		ft_printf("%s", data->str);
-		free(data->str);
 		data->len_bits = 0;
 		data->len = 0;
 		packet->i = 0;
@@ -83,7 +84,7 @@ int	main(int ac, char **av)
 		ft_putendl_fd("Too many arguments.", 2);
 		return (1);
 	}
-	ft_printf("%d\n", getpid());
+	ft_printf("Server pid: %d\n", getpid());
 	signals.sa_sigaction = &handler;
 	sigaction(SIGUSR1, &signals, NULL);
 	sigaction(SIGUSR2, &signals, NULL);
