@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: recherra <recherra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 16:33:45 by recherra          #+#    #+#             */
-/*   Updated: 2024/05/07 15:28:07 by recherra         ###   ########.fr       */
+/*   Created: 2024/05/02 19:23:27 by recherra          #+#    #+#             */
+/*   Updated: 2024/05/06 20:53:01 by recherra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	reset_values(t_len *data, t_char *packet, pid_t new_pid)
 	data->str = NULL;
 }
 
-void	get_string(t_len *data, t_char *packet, int signal)
+void	get_string(t_len *data, t_char *packet, int signal, pid_t client_pid)
 {
 	packet->ch = packet->ch << 1;
 	if (signal == SIGUSR2)
@@ -43,6 +43,7 @@ void	get_string(t_len *data, t_char *packet, int signal)
 		data->len_bits = 0;
 		data->len = 0;
 		packet->i = 0;
+		kill(client_pid, SIGUSR1);
 	}
 }
 
@@ -68,10 +69,11 @@ void	handler(int signal, siginfo_t *info, void *context)
 				reset_values(&data, &packet, info->si_pid);
 				return ;
 			}
+			data.str[data.len] = 0;
 		}
 	}
 	else
-		get_string(&data, &packet, signal);
+		get_string(&data, &packet, signal, info->si_pid);
 }
 
 int	main(int ac, char **av)
